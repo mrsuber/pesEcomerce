@@ -38,13 +38,13 @@ const UserSchema = new mongoose.Schema({
     type:String,
     default:"https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png"
   },
-  // googleId: {
-  //   type: String,
-  //   unique: true,
-  //   sparse: true, // Allows for unique but nullable values
-  // },
+  googleId: {
+    type: String,
+    unique: true,
+    sparse: true, // Allows for unique but nullable values
+  },
   fileName: String,
-  role:{type:String,default:'superadmin'},
+  role:{type:String,default:'user'},
   gender:{type:String,default:''},
   mobile:{type:String,default:''},
   address:{type:String,default:''},

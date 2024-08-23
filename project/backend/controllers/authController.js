@@ -75,7 +75,7 @@ const generateEmailTemplate = (code) => {
       <div>
           <div style="max-width:620px; margin:0 auto; font-family:sans-serif; color:#272727;">
             <h1 style="background:#f6f6f6; padding:10px; text-align:center; color:#272727;">
-            We are delighted to welcome you to our wine shop
+            We are delighted to welcome you to our suberDesign shop
 
             </h1>
             <p>Please Verify Your Email To Continue Your Verification code is:</p>
@@ -354,7 +354,7 @@ const authCtrl = {
       await newUser.save();
       //sending mail
       mailTransport().sendMail({
-        form: "winetastingVerification@winetasting.com",
+        form: "suberDesign@suberdesign.com",
         to: newUser.email,
         subject: "Verify your email account",
         html: generateEmailTemplate(OTP),
@@ -416,12 +416,12 @@ const authCtrl = {
     await user.save();
 
     mailTransport().sendMail({
-      form: "winetastingVerification@winetasting.com",
+      form: "suberDesignVerification@suberDesign.com",
       to: user.email,
       subject: "Welcome Email",
       html: plainEmailTemplate(
         "Email Verified Successfully",
-        "Thanks for connecting with winetasting"
+        "Thanks for connecting with suberDesign"
       ),
     });
 
@@ -619,7 +619,7 @@ const authCtrl = {
       await resetToken.save();
 
       mailTransport().sendMail({
-        form: "winetastingSecurity@winetasting.com",
+        form: "suberDesignSecurity@suberDesigntasting.com",
         to: user.email,
         subject: "Password Reset",
         html: generatePasswordResetTemplate(
@@ -673,7 +673,7 @@ const authCtrl = {
       await resetToken.save();
 
       mailTransport().sendMail({
-        form: "winetastingSecurity@winetasting.com",
+        form: "suberDesignSecurity@suberdesign.com",
         to: user.email,
         subject: "Password Reset",
         html: generateEmailTemplate2(OTP),
@@ -724,7 +724,7 @@ const authCtrl = {
       await verificationToken.save();
       //sending mail
       mailTransport().sendMail({
-        form: "winetastingVerification@winetasting.com",
+        form: "suberDesignVerification@suberDesign.com",
         to: user.email,
         subject: "Verify your email account(new code)",
         html: generateEmailTemplate(OTP),
@@ -778,7 +778,7 @@ const authCtrl = {
       const resetToken = await ResetToken.findOneAndRemove({ owner: user._id });
 
       mailTransport().sendMail({
-        form: "winetastingSecurity@winetasting.com",
+        form: "suberDesignSecurity@suberDesign.com",
         to: user.email,
         subject: "Password Reset Successfully",
         html: generatePasswordResetTemplateSuccess(
@@ -859,7 +859,7 @@ const authCtrl = {
       });
 
       mailTransport().sendMail({
-        form: "winetastingSecurity@winetasting.com",
+        form: "suberDesignSecurity@suberDesign.com",
         to: user.email,
         subject: "Password Reset Successfully",
         html: generatePasswordResetTemplateSuccess(

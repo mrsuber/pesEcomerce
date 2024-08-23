@@ -61,6 +61,7 @@ if(process.env.NODE_ENV==="production"){
 
 //routes
 app.use('/api', require('../routes/authRouter'))
+app.use('/api', require('../routes/userRouter'))
 
 // Use Error Handler
 app.use(globalErrorHandler);
