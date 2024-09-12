@@ -265,15 +265,7 @@ const authCtrl = {
           new ErrorResponse("Name must be 3 to 20 characters long!", 400)
         );
       }
-       //this removes spaces form user name and lowercase all the letters
-       let newUserName = username.toLowerCase().replace(/ /g, "");
        
-      const user_name = await Users.findOne({ username: newUserName });
-
-      if (user_name) {
-        res.status(400).json({ msg: "This user name already exists." });
-        return next(new ErrorResponse("This user name already exists.", 400));
-      }
 
       //check on email
       if (!email) {
@@ -291,6 +283,16 @@ const authCtrl = {
       if (user_email) {
         res.status(400).json({ msg: "This email already exists." });
         return next(new ErrorResponse("This email already exists.", 400));
+      }
+
+      //this removes spaces form user name and lowercase all the letters
+      let newUserName = username.toLowerCase().replace(/ /g, "");
+       
+      const user_name = await Users.findOne({ username: newUserName });
+
+      if (user_name) {
+        res.status(400).json({ msg: "This user name already exists." });
+        return next(new ErrorResponse("This user name already exists.", 400));
       }
 
       //check on password
@@ -360,7 +362,7 @@ const authCtrl = {
         html: generateEmailTemplate(OTP),
       });
 
-      res.json({
+      res.status(201).json({
         msg: "Register Success!",
         access_token,
         refresh_token,
@@ -486,7 +488,7 @@ const authCtrl = {
         maxAge: 30 * 24 * 60 * 60 * 1000, //30days
       });
 
-      res.json({
+      res.status(200).json({
         msg: "Login Success!",
         access_token,
         refresh_token,
@@ -742,30 +744,30 @@ const authCtrl = {
       const { password } = req.body;
 
       if (!password) {
-        res.status(400).json({ msg: "Please input new password" });
-        return next(new ErrorResponse("Please input new password", 400));
+        res.status(406).json({ msg: "Please input new password" });
+        return next(new ErrorResponse("Please input new password", 406));
       }
 
       const user = await Users.findById(req.user._id).select("+password");
 
       if (!user) {
-        res.status(400).json({ msg: "User not found" });
-        return next(new ErrorResponse("User not found", 400));
+        res.status(401).json({ msg: "User not found" });
+        return next(new ErrorResponse("User not found", 401));
       }
 
       const isSamePassword = await bcrypt.compare(password, user.password);
 
       if (isSamePassword) {
-        res.status(400).json({ msg: "New Password must be different" });
-        return next(new ErrorResponse("New Password must be different", 400));
+        res.status(402).json({ msg: "New Password must be different" });
+        return next(new ErrorResponse("New Password must be different", 402));
       }
 
       if (password.trim().length < 6 || password.trim().length > 20) {
         res
-          .status(400)
+          .status(403)
           .json({ msg: "Password mustbe at least 6 to 20 characters" });
         return next(
-          new ErrorResponse("Password mustbe at least 6 to 20 characters", 400)
+          new ErrorResponse("Password mustbe at least 6 to 20 characters", 403)
         );
       }
       // encript passwords

@@ -15,11 +15,13 @@ router.post('/refresh_token_app', authCtrl.generateAccessToken2)
 router.post('/verify-email', authCtrl.verifyEmail)
 router.post('/resend-email', authCtrl.resendEmail)
 router.post('/verify-otp', authCtrl.verifyOTP)
-
+//forgot via link
 router.post('/forgotpassword', authCtrl.forgotpassword)
+//forgot via otp
 router.post('/forgotpassword2', authCtrl.forgotpassword2)
-
+// reset via link
 router.post('/reset-password', isResetTokenValid, authCtrl.resetpassword)
+// reset via otp
 router.post('/reset-password2',  authCtrl.resetpassword2)
 
 

@@ -63,6 +63,15 @@ if(process.env.NODE_ENV==="production"){
 app.use('/api', require('../routes/authRouter'))
 app.use('/api', require('../routes/userRouter'))
 
+// Mount routes
+app.use('/api/products', require('../routes/productRoutes'))
+app.use('/api', require('../routes/categoryRouter'));
+app.use('/api/tags', require('../routes/tagRouter'));
+app.use('/api/wishlist', require('../routes/wishlistRoutes'));
+app.use('/api/coupons', require('../routes/couponRoutes'));
+app.use('/api/inventory', require('../routes/inventoryRoutes'));
+app.use('/api/shipping', require('../routes/shippingRoutes'));
+
 // Use Error Handler
 app.use(globalErrorHandler);
 
